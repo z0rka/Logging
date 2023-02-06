@@ -24,8 +24,10 @@ public class LoggingApplication {
         coffeeOrderBoard.add("Tolia");
         coffeeOrderBoard.add("Katya");
         coffeeOrderBoard.add("Kostya");
+        coffeeOrderBoard.add(null);
 
         coffeeOrderBoard.deliver();
+        coffeeOrderBoard.deliver(0);
         coffeeOrderBoard.deliver(1);
         coffeeOrderBoard.deliver(2);
 

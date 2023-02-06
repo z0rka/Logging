@@ -10,29 +10,32 @@
     <!--  В консоль -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{DD/MM/YYYY HH:mm:ss.SSS} | %-10.10thread | %-36.36logger{36} | %5p | %m%n
+            <pattern>%d{HH:mm:ss.SSS} | %-10.10thread | %-36.36logger{36} | %5p | %m%n
             </pattern>
         </encoder>
     </appender>
 
-    <!--  В файл -->
-    <appender name="SIZE_BASED_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_DIR}/splitted/tests.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+    <!--  В файл з розбиттям -->
+    <appender name="TIME_BASED_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>log/orderBoard.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+
+            <fileNamePattern>log/orderBoard.%d{yyyy-MM-dd-HH-mm}.%i.log</fileNamePattern>
             <maxHistory>10</maxHistory>
-            <sizeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-                <maxFileSize>1KB</maxFileSize>
-            </sizeBasedFileNamingAndTriggeringPolicy>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10KB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+
         </rollingPolicy>
 
         <encoder>
-            <pattern>%d{DD/MM/YYYY HH:mm:ss.SSS} | %-10.10thread | %-36.36logger{36} | %5p | %m%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} | %-10.10thread | %-36.36logger{36} | %5p | %m%n</pattern>
         </encoder>
     </appender>
 
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
-        <appender-ref ref="SIZE_BASED_FILE"/>
+        <appender-ref ref="TIME_BASED_FILE"/>
     </root>
 
 </configuration>
